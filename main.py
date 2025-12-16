@@ -9,22 +9,17 @@ load_dotenv()
 API_KEY = os.environ["GOOGLE_API_KEY"]
 
 llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-pro",
+    model="gemini-2.0-flash",
     temperature=0.2,
     api_key=API_KEY
-)
-                     
-def get_weather(city: str) -> str:
-    """Get weather for a given city"""
-    return f"It's always sunny in {city}!"
+)                   
 
 agent = create_agent(
     model=llm,
-    tools=[get_weather],
+    tools=[],
     system_prompt="You are a helpful assistant",
 )
 
 response = agent.invoke({"messages": [{"role": "user", "content": "What is the weather in Derry, Northern Ireland?"}]})
-
 
 print(response)
