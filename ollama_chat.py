@@ -1,10 +1,16 @@
 import ollama
 
+query = input('Input: ')
+sys_context = 'Keep your response to less than 10 words'
+
 response = ollama.chat(
     model='llama3',
     messages=[
-        {'role': 'user', 'content': 'What is the weather like in Derry, Northern Ireland?'}
+        {'role': 'system',
+         'content': sys_context},
+        {'role': 'user', 
+        'content': query}
     ]
 )
 
-print(response['message']['content'])
+print('Output: ' + response['message']['content'])
